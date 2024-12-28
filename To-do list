@@ -1,0 +1,74 @@
+from InquirerPy import prompt
+
+tarefas = []
+
+def adicionar():
+	print()
+	tarefa = input(f'Tarefa nº {len(tarefas)}: ').strip()
+#	if tarefa.lower() == 'fim':
+		
+#	else:
+	tarefas.append({'tarefa': tarefa, 'concluida': False})
+	    
+
+def remover():
+	while True:
+		numero = int(input('Digite o número da tarefa que deseja remover: '))
+		if 0 < numero > len(tarefas)-1:
+			print('Número de tarefa inválido!')
+		else:
+			del tarefas[numero]
+			break
+			
+
+def concluir():
+	numero = int(input('Digite o número da tarefa que deseja marcar como concluída: '))
+	if 0 < numero <= len(tarefas):
+		tarefas[numero]['concluida'] = True
+		print(f"Tarefa '{tarefas[numero]['tarefa']}' marcada como concluída!")
+	else:
+		print('Número de tarefa inválido!')
+  
+              
+def exibir():
+	print('\n' + '-' * 67)
+	print('Suas Tarefas:')
+	print('-' * 67)
+	
+	for idx, tarefa in enumerate(tarefas, 0):
+	    status = 'Concluída' if tarefa['concluida'] else 'Pendente'
+	    print(f"{idx}. {tarefa['tarefa']} - {status}")
+
+	print('-' *67)    
+    
+    
+def menu():
+	MENU = {
+	'type': 'list',
+	'message': 'Sua opcão:',
+	'choices': ['Adicionar Tarefa', 'Remover Tarefa', 'Marcar Tarefa como conluída', 'Exibir Lista de Tarefas', 'Sair do programa']
+	}
+	
+	resposta = prompt(MENU)
+	return resposta
+	
+
+
+
+print('-' * 67)
+print(f"{'Lista de Tarefas':^67}")
+print('-' * 67)
+while True:		
+	resposta = menu()
+	
+	if resposta == {0: 'Adicionar Tarefa'}:
+		adicionar()
+	elif resposta == {0: 'Remover Tarefa'}:
+		remover()
+	elif resposta == {0: 'Marcar Tarefa como conluída'}:
+		concluir()
+	elif resposta == {0: 'Exibir Lista de Tarefas'}:
+		exibir()
+	else:
+		break
+	print()
