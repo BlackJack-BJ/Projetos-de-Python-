@@ -26,7 +26,7 @@ while True:
 	sleep(0.5)	
 
 		
-'''By GPT
+'''Uma versão que estou analisando...
 from random import randint
 from time import sleep
 
