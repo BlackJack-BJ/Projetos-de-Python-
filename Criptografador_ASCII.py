@@ -10,13 +10,14 @@ def criptografar():
     for carater in texto:
         txt = ord(carater)
         lista_criptografar.append(txt)
-    print(f'"{texto}" criptografado: ', end = '')
+    print(f'"{texto}" criptografado: \033[1;31m', end = '')
 
     for pos, item in enumerate(lista_criptografar):
         if pos < len(lista_criptografar) - 1:
-            print(item, end = '-')
+            print(item, end = ' ')
         else:
             print(item)
+    print('\033[m')
         
 
 def descriptografar():
@@ -24,28 +25,40 @@ def descriptografar():
     try:
         texto = input('Digite o texto a descriptografar: ')
     except KeyboardInterrupt:
-        print('O usuário preferiu não digitar nada :('     )
+        print('O usuário preferiu não digitar nada :(')
+    '''
+#    texto.replace('-', ' ')
+#    texto.split()
+    '''
+    for conjunto in texto.split():
+        lista_descriptografar.append(conjunto)
     
-    texto.replace('-', ' ')
-    texto.split()
-    
-    print(f'"{texto}" descriptografado: ', end = '')
+    print(f'"{texto}" descriptografado: \033[1;32m', end = '')
 
-    for string in lista_descriptografar:
-        chr(int(string))
-        print(chr, end = '')
+    for numero in lista_descriptografar:
+        numero_convertido = int(numero)
+        print(chr(numero_convertido), end = '')
+    print('\033[m\n')
+
 
 while True:
-    opcao = inquirer.select(
-        message = 'Sua opção:',                     
-        choices = ['🔐 Criptografar', '🔓 Descriptografar', '🚪 Sair']
-    ).execute()
+    try:
+        opcao = inquirer.select(
+            message = 'Sua opção:',
+            choices = ['🔐 Criptografar', '🔓 Descriptografar', '🚪 Sair']
+        ).execute()
+
+    except KeyboardInterrupt:
+        print('O usuário preferiu não selecionar nada :(\n')
+        continue
 
     if opcao == '🔐 Criptografar':
         criptografar()
     elif opcao == '🔓 Descriptografar':
         descriptografar()
     else:
-        print('\n'+'||Tenha um bom dia!||'.center(55))
+        print()
+        print('---------------------'.center(55))
+        print('||Tenha um bom dia!||'.center(55))
+        print('---------------------'.center(55))
         break
-    print('\n')
