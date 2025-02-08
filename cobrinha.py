@@ -50,7 +50,7 @@ while True:
 	'''
 	#tentei match-case, não funciona :(
 	if direcao == K_RIGHT:
-		cobra_pos[0] = cobra_pos[0][0] + BLOCK, cobra_pos[0][1] #Movimenta para a direita # sao 2 elementos por causa da funcao da linha 27
+		cobra_pos[0] = cobra_pos[0][0] + BLOCK, cobra_pos[0][1] #Movimenta para a direita # sao 2 elementos por causa da funcao da linha 36
 	elif direcao == K_LEFT:
 		cobra_pos[0] = cobra_pos[0][0] - BLOCK, cobra_pos[0][1] #Movimenta para a esquerda
 	elif direcao == K_UP:
