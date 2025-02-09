@@ -9,7 +9,7 @@ def menu():
 
 
 def registar_livro():
-    livro = input('Digite o título do livro: ')
+    livro = input('Digite o título do livro: ').capitalize()
     with open ('Livros.txt', 'a') as arquivo:
         arquivo.write(f"• {livro}\n")
 
@@ -22,42 +22,50 @@ def registar_pessoa():
 
 def pegar_livro_emprestado():
     nome_livro = input('Degite o nome do livro: ')
-    with open ('Livros.txt', 'r') as arquivo:
-        for linha in arquivo:
-            for char in linha:
-                if char == '•':
+    with open ('Livros.txt', "a+") as arquivo:
+        conteudo = arquivo.readlines()
+        for c in range (0, len(conteudo)):
+            if nome_livro.lower() in conteudo[c].lower():
+                linha_var = conteudo[c]
+                if '*' in conteudo[c]:
                     print('Este livro não está disponível para empréstimo')
                 else:
-                    if nome_livro in linha:
-                        print(f"\033[32;1mVocê pegou o livro {nome_livro} emprestado\033[m")
-                    else:
-                        print(f"\033[1;31mLivro {nome_livro} não encontrado :(\033[m")
-
-
-def devolver_livro_emprestado():
-    nome_livro = input('Digite o nome do livro: ')
-    with open ('Livros.txt', 'r') as arquivo:
-        conteudo = arquivo.read()
-        for linha in conteudo:
-            if nome_livro in linha:
-                for char in linha:
-                    if char == '*':
-                        print('Livro devolvido!')
-                        conteudo = '•'
-                        with open ('Livros.txt', 'w') as arquivo:
-                            arquivo.write(conteudo)
-                    else:
-                        print('Este livro não foi emprestado')
+                    linha_var.replace('•', '*')
+                    conteudo[c] = linha_var
+                    print(f"\033[32;1mVocê pegou o livro {nome_livro} emprestado\033[m")
+                    for item in conteudo:
+                        arquivo.write(item)
             else:
-                print(f"\033[1;31mLivro {nome_livro} não encontrado :(\033[m")
+                print(f"\033[1;31mLivro \"{nome_livro}\" não encontrado :(\033[m")
+                #
+                #       else:
+                #           print(f"\033[1;31mLivro {nome_livro} não encontrado :(\033[m")
 
 
+def devolver_livro_emprestado(:
     nome_livro = input('Digite o nome do livro: ')
+    with open ('Livros.txt', "a+") as arquivo:
+        conteudo = arquivo.readlines()
+        for linha in conteudo:
+            if nome_livro.lower() in linha.lower():
+                linha_var = linha
+                if '*' in linha:
+                    linha_var.replace('*', '•')
+                    conteudo.replace(linha, linha_var)
+                    print('Livro devolvido!')
+                    arquivo.write(conteudo)
+                else:
+                    print('Este livro não foi emprestado')
+            else:
+                print(f"\033[1;31mLivro \"{nome_livro}\" não encontrado :(\033[m")
+
+
+#    nome_livro = input('Digite o nome do livro: ')
 while True:
     try:
         menu()
     except KeyboardInterrupt:
-        print('Aqui só se sai Da forma certa')
+        print('Aqui só se sai da forma certa')
 
     match opcao:
         case 'Registar livro':
@@ -74,4 +82,5 @@ while True:
 
         case _:
             break
+
 
