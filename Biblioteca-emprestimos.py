@@ -1,11 +1,12 @@
 from InquirerPy import inquirer
 
-def menu():
-    global opcao
+def menu() -> str:
     opcao = inquirer.select(
         message = 'Sua opção:',
         choices = ['Registar livro', 'Registar pessoa', 'Pegar livro emprestado', 'Devolver livro emprestado', 'Sair'], 
     ).execute()
+
+    return opcao
 
 
 def registar_livro():
@@ -42,7 +43,7 @@ def pegar_livro_emprestado():
                 #           print(f"\033[1;31mLivro {nome_livro} não encontrado :(\033[m")
 
 
-def devolver_livro_emprestado(:
+def devolver_livro_emprestado():
     nome_livro = input('Digite o nome do livro: ')
     with open ('Livros.txt', "a+") as arquivo:
         conteudo = arquivo.readlines()
@@ -63,10 +64,10 @@ def devolver_livro_emprestado(:
 #    nome_livro = input('Digite o nome do livro: ')
 while True:
     try:
-        menu()
+        opcao = menu()
     except KeyboardInterrupt:
         print('Aqui só se sai da forma certa')
-
+    
     match opcao:
         case 'Registar livro':
             registar_livro()
